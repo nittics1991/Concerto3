@@ -7,10 +7,17 @@
             "email": "bunpabcom@gmail.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:nittics1991/Movement.git"
+        }
+    ],
     "require": {
         "league/route": "^4.3",
         "tuupola/http-factory": "^1.1",
         "zendframework/zend-diactoros": "^2.2",
-        "zendframework/zend-httphandlerrunner": "^1.1"
+        "zendframework/zend-httphandlerrunner": "^1.1",
+        "nittics1991/Movement": "dev-test"
     }
 }
