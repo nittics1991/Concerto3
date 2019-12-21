@@ -6,16 +6,30 @@
 */
 declare(strict_types=1);
 
+use Concerto\container\{
+    ReflectionContainer,
+    ServiceContainer,
+    ServiceProviderContainer
+};
+
 $container = call_user_func(function () {
+    $delegates = [
+        ReflectionContainer::class,
+        ServiceProviderContainer::class,
+    ];
+    
     $providers = [
         
     ];
     
-    $container = new Container();
-    $container->delegate(new ServiceProviderContainer());
+    $container = new ServiceContainer();
+    
+    foreach ($delegates as $delegate) {
+        $container->delegate(new $delegate());
+    }
     
     foreach ($providers as $provider) {
-        $container->addServiceProvider($provider);
+        $container->addServiceProvider(new $provider());
     }
     return $container;
 });
