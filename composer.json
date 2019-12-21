@@ -1,0 +1,16 @@
+{
+    "name": "nittics1991/concerto3",
+    "type": "project",
+    "authors": [
+        {
+            "name": "nittics1991",
+            "email": "bunpabcom@gmail.com"
+        }
+    ],
+    "require": {
+        "league/route": "^4.3",
+        "tuupola/http-factory": "^1.1",
+        "zendframework/zend-diactoros": "^2.2",
+        "zendframework/zend-httphandlerrunner": "^1.1"
+    }
+}
