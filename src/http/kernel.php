@@ -1,20 +1,23 @@
 <?php
 
 /**
-*   app
+*   kernel
 *
 *   @version 191222
 */
 declare(strict_types=1);
 
+namespace http;
+
+use Concerto\http\EmitterInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-$app = $containe->get('router');
+$middleware = $containe->get(RequestHandlerInterface::class);
 $request = $containe->get(ServerRequestInterface::class);
 
 require_once(realpath(__DIR__ . '/middlewares.php'));
 
-$response = $app->dispatch($request);
+$response = $middleware->handle($request);
 
-$emitter = $containe->get('emitter');
+$emitter = $containe->get(EmitterInterface::class);
 $emitter->emit($request);

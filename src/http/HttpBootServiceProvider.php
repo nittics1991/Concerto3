@@ -13,65 +13,76 @@ use Concerto\container\provider\{
     AbstractServiceProvider,
     BootableServiceProviderInterface
 };
+use Concerto\http\{
+    EmitterInterface,
+    LeagueRequestHandlerAdapter
+};
 use League\Route\Router;
 use Psr\Http\Message\{
     ResponseInterface,
     ServerRequestInterface
 };
+use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\{
     ServerRequestFactory,
     Response
 };
 use Zend\HttpHandlerRunner\Emitter\SapiEmitter;
 
-use Concerto\container\provider{
-    AbstractServiceProvider,
-    BootableServiceProviderInterface
-};
-
 class HttpBootServiceProvider extends AbstractServiceProvider implements
     BootableServiceProviderInterface
 {
     protected $provides = [
-        'router',
+        RequestHandlerInterface::class,
         ServerRequestInterface::class,
         ResponseInterface::class,
-        'emitter'
+        EmitterInterface::class
     ];
 
     public function register()
     {
-        $this->share('router', function($container)) {
-            return new Router();
-        });
+        $this->share(
+            Router::class,
+            function($container) {
+                return new Router();
+            }
+        );
+        
+        $this->share(
+            RequestHandlerInterface::class,
+            function($container) {
+                return new LeagueRequestHandlerAdapter(
+                    $container->get(Router::class)
+                );
+            }
+        );
         
         $this->share(
             ServerRequestInterface::class,
-            , function($container)
-        ) {
-            return new ServerRequestFactory::fromGlobals(
-                $_SERVER,
-                $_GET,
-                $_POST,
-                $_COOKIE,
-                $_FILES
-            );
-        });
+                function($container) {
+                    return ServerRequestFactory::fromGlobals(
+                        $_SERVER,
+                        $_GET,
+                        $_POST,
+                        $_COOKIE,
+                        $_FILES
+                    );
+                }
+        );
         
         $this->share(
             ResponseInterface::class,
-            , function($container)
-        ) {
-            return new Response();
-        });
+                function($container) {
+                return new Response();
+            }
+        );
         
-        $this->share('emitter', function($container)) {
-            return new SapiEmitter();
-        });
-        
-        
-        
-        
+        $this->share(
+            EmitterInterface::class,
+            function($container) {
+                return new SapiEmitter();
+            }
+        );
     }
     
     public function boot()
