@@ -1,0 +1,44 @@
+
+////////////////////////////////////////////////////////////////////////
+
+factoryとcontaninerとporivideの関係は?
+providerとconfigの関係は?
+
+ModelDataはDB/fileを気にしないためのもの?
+
+////////////////////////////////////////////////////////////////////////
+
+projects
+    infrastructure
+        database
+            DB model
+            
+    システム共通の
+    provider
+    config
+    template
+    
+    
+    
+    
+    project1
+        controller
+            http処理のみ
+            middleware追加もココ
+        action(service)
+            main処理
+            http/domain橋渡し
+        
+        
+        domain
+        service
+        factory
+        provider
+        config
+        view
+        template
+        
+        
+
+
+
