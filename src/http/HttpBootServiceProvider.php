@@ -9,11 +9,11 @@ declare(strict_types=1);
 
 namespace http;
 
-use Concerto\container\provider\{
+use Movement\container\provider\{
     AbstractServiceProvider,
     BootableServiceProviderInterface
 };
-use Concerto\http\{
+use Movement\http\{
     EmitterInterface,
     LeagueRequestHandlerAdapter
 };

@@ -6,7 +6,7 @@
 */
 declare(strict_types=1);
 
-use Concerto\container\{
+use Movement\container\{
     ReflectionContainer,
     ServiceContainer,
     ServiceProviderContainer

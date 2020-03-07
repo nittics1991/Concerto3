@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace http;
 
-use Concerto\http\EmitterInterface;
+use Movement\http\EmitterInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 $middleware = $containe->get(RequestHandlerInterface::class);
